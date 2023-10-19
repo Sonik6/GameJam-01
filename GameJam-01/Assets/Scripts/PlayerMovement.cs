@@ -7,8 +7,19 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce;
     public bool inputBlock;
     
+<<<<<<< Updated upstream
     private Rigidbody2D rb;
     // Start is called before the first frame update
+=======
+    public Rigidbody2D rb;
+    private bool isGrounded;
+
+    void Jump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+    }
+
+>>>>>>> Stashed changes
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
