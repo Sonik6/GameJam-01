@@ -241,6 +241,38 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2507267534469736051, guid: f18a21dc3459a9c4aa2bafc57fd099be, type: 3}
+      propertyPath: m_Mass
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2507267534469736051, guid: f18a21dc3459a9c4aa2bafc57fd099be, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 8f9fb61fd8a1040f895e8647d58375a9, type: 2}
+    - target: {fileID: 6813151987818532318, guid: f18a21dc3459a9c4aa2bafc57fd099be, type: 3}
+      propertyPath: jumpValue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813151987818532318, guid: f18a21dc3459a9c4aa2bafc57fd099be, type: 3}
+      propertyPath: walkSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813151987818532318, guid: f18a21dc3459a9c4aa2bafc57fd099be, type: 3}
+      propertyPath: isGrounded
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813151987818532318, guid: f18a21dc3459a9c4aa2bafc57fd099be, type: 3}
+      propertyPath: bounceMaterial
+      value: 
+      objectReference: {fileID: 6200000, guid: e3dedb8c00413410fbb1493a5834b2e4, type: 2}
+    - target: {fileID: 6813151987818532318, guid: f18a21dc3459a9c4aa2bafc57fd099be, type: 3}
+      propertyPath: playerMaterial
+      value: 
+      objectReference: {fileID: 6200000, guid: 8f9fb61fd8a1040f895e8647d58375a9, type: 2}
+    - target: {fileID: 6813151987818532318, guid: f18a21dc3459a9c4aa2bafc57fd099be, type: 3}
+      propertyPath: groudMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
