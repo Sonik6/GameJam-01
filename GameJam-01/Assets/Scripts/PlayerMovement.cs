@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
         
         if (isGrounded && canJump && Input.GetKey("space"))
         {
-            jumpForce += 0.1f;
+            jumpForce += 0.05f;
         }
 
         if(Input.GetKeyDown("space") && isGrounded && canJump)
@@ -48,9 +48,9 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(0.0f, rb.velocity.y);
         }
         
-        if(jumpForce >= 15f && isGrounded)
+        if(jumpForce >= 8f && isGrounded)
         {
-            float tempx = horizontalInput * moveSpeed * 1.5f;
+            float tempx = horizontalInput * moveSpeed * 0.6f;
             float tempy = jumpForce;
             rb.velocity = new Vector2(tempx, tempy);
             Invoke("ResetJump", 0.2f);
