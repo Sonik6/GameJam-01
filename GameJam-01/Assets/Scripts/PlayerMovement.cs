@@ -46,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey("space") && isGrounded && canJump)
         {
+            if (jumpValue < 9f) 
             jumpValue += 0.03f;
         }
 
@@ -54,15 +55,14 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(0.0f, rb.velocity.y);
         }
         
-        if (jumpValue >= 9f && isGrounded && canJump )
+        /*if (jumpValue >= 9f && isGrounded && canJump )
         {
             float tempx = moveInput * walkSpeed;
             float tempy = jumpValue;
             rb.velocity = new Vector2(tempx, tempy);
             Invoke("ResetJump", 0.3f);
-            canJump = false;
             isGrounded = false;
-        }   
+        }*/   
 
         if (Input.GetKeyUp("space"))
         {
@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
     
     void ResetJump()
     {
-        canJump = false;
+        /*canJump = false*/;
         jumpValue = 0.0f;
     }
     void OnDrawGizmosSelected()
