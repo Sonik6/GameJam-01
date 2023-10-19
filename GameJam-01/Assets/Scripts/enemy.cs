@@ -9,11 +9,12 @@ public class enemyBehaviour : MonoBehaviour
     // Start is called before the first frame update
 
     private Rigidbody2D rb;
-    public int movingSpeed = 200;
+    public int movingSpeedVertical = 200;
+    public int movingSpeedHorizontal = 200;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(new Vector2(movingSpeed, 0));
+        rb.AddForce(new Vector2(movingSpeedHorizontal, movingSpeedVertical));
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -23,7 +24,7 @@ public class enemyBehaviour : MonoBehaviour
 
         if (collision.gameObject.tag == "wall")
         {
-            rb.AddForce(new Vector2(movingSpeed * -1, 0));
+            rb.AddForce(new Vector2(movingSpeedHorizontal * -1, movingSpeedVertical * -1));
             Debug.Log("hit");
         }
 
