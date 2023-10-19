@@ -16859,6 +16859,10 @@ PrefabInstance:
       propertyPath: saw
       value: 
       objectReference: {fileID: 8300000, guid: 133039232b4322249a2f02e5a0964969, type: 3}
+    - target: {fileID: 990771983866484373, guid: d3c2f26937126384480f6add8b8e1ada, type: 3}
+      propertyPath: spawnableObject
+      value: 
+      objectReference: {fileID: 7378392536266399159, guid: 2bb327f92e222431e8c1f44655d4a312, type: 3}
     - target: {fileID: 1662556806174466053, guid: d3c2f26937126384480f6add8b8e1ada, type: 3}
       propertyPath: m_audioClip
       value: 
@@ -16867,6 +16871,10 @@ PrefabInstance:
       propertyPath: saw
       value: 
       objectReference: {fileID: 8300000, guid: 133039232b4322249a2f02e5a0964969, type: 3}
+    - target: {fileID: 1702097284128569970, guid: d3c2f26937126384480f6add8b8e1ada, type: 3}
+      propertyPath: spawnableObject
+      value: 
+      objectReference: {fileID: 7378392536266399159, guid: 2bb327f92e222431e8c1f44655d4a312, type: 3}
     - target: {fileID: 2590428351569321670, guid: d3c2f26937126384480f6add8b8e1ada, type: 3}
       propertyPath: m_Name
       value: Gates
@@ -16879,6 +16887,10 @@ PrefabInstance:
       propertyPath: saw
       value: 
       objectReference: {fileID: 8300000, guid: 133039232b4322249a2f02e5a0964969, type: 3}
+    - target: {fileID: 5322576650313543565, guid: d3c2f26937126384480f6add8b8e1ada, type: 3}
+      propertyPath: spawnableObject
+      value: 
+      objectReference: {fileID: 7378392536266399159, guid: 2bb327f92e222431e8c1f44655d4a312, type: 3}
     - target: {fileID: 6012565015713847581, guid: d3c2f26937126384480f6add8b8e1ada, type: 3}
       propertyPath: m_audioClip
       value: 
