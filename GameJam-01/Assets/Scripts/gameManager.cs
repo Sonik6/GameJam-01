@@ -9,6 +9,7 @@ public class gameManager : MonoBehaviour
 {
     public GameObject enemyObject;
     public static int health = 3;
+    public static int currentLevel = 1;
     public static GameObject playerObject = GameObject.Find("PlayerCharacter");
 
     private int healthCheck;
@@ -16,6 +17,7 @@ public class gameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         playerObject = GameObject.Find("PlayerCharacter");
     }
     public static void Death()
@@ -23,6 +25,15 @@ public class gameManager : MonoBehaviour
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
 
+    }
+    public static void nextLevel()
+    { 
+        currentLevel++;
+        string nextLevelName = "Level" + currentLevel;
+        Debug.Log(nextLevelName);
+
+        
+    
     }
     public static void DeathMainMenu()
     {
