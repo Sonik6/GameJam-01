@@ -19,10 +19,9 @@ public class enemyBehaviour : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
-        { 
-            Destroy(gameObject);
-
+        if (collision.gameObject == GameObject.Find("PlayerCharacter"))
+        {
+            gameManager.Damage();   
         }
 
         if (collision.gameObject.tag == "wall")
@@ -34,14 +33,7 @@ public class enemyBehaviour : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            gameManager.playerDamage.Invoke();
-            gameManager.health--;
-            gameManager.Death();
-            Debug.Log("player health" + gameManager.health);
-            Destroy(collision.gameObject);
-        }
+            Destroy(gameObject);    
     }
 
     // Update is called once per frame
