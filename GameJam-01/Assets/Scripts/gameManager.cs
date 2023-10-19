@@ -7,10 +7,10 @@ using UnityEngine.SceneManagement;
 
 public class gameManager : MonoBehaviour
 {
-    public GameObject playerObject;
     public GameObject enemyObject;
     public static UnityEvent playerDamage;
     public static int health = 3;
+    public static GameObject playerObject = GameObject.Find("PlayerCharacter");
 
     private int healthCheck;
 
@@ -27,38 +27,37 @@ public class gameManager : MonoBehaviour
         SceneManager.LoadScene(scene.name);
 
     }
+    public static void DeathMainMenu()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene("MainMenu");
+        gameManager.health = 3;
+    }
     public static void Damage()
     {
+        Debug.Log("player health" + gameManager.health);
+
         gameManager.health = gameManager.health - 1;
-        Death();
-    
+        if (gameManager.health <= 0)
+        { 
+            DeathMainMenu();
+        }
+        else
+        {
+            Death();
+        }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    { }
+
 
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("health: " + gameManager.health);
-        Debug.Log("healthcheck:" + healthCheck);
+
         playerDamage.AddListener(Damage);
-            if (gameManager.health > 0)
-            {
-                healthCheck = gameManager.health;
-                playerObject = GameObject.Find("PlayerCharacter");
-                double playerPosY = playerObject.transform.position.y;
-                if (playerPosY < -6)
-                {
-                    gameManager.health = 0;
-                }
-            }
-            if (gameManager.health <= 0)
-            {
-                healthCheck = gameManager.health;
-                SceneManager.LoadScene(sceneName: "MainMenu");
-            }
-        }
+        
+
+    }
 
     }
     
