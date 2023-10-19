@@ -24,8 +24,17 @@ public class PlayerMovement : MonoBehaviour
 
         if (jumpForce == 0.0f && isGrounded)
         {
-            Debug.Log(jumpForce);
-            Debug.Log(isGrounded);
+            Vector3 characterScale = transform.localScale;
+            if (Input.GetKey("left") && characterScale.x>0)
+            {
+                characterScale.x *= -1;
+            }
+            if (Input.GetKey("right") && characterScale.x < 0)
+            {
+                characterScale.x *= -1;
+            }
+            transform.localScale = characterScale;
+
             rb.velocity = new Vector2(horizontalInput * (moveSpeed * 0.5f), rb.velocity.y);
         }
         
