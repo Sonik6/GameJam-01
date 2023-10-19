@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,9 +10,10 @@ public class gameManager : MonoBehaviour
 {
     public GameObject enemyObject;
     public static int health = 3;
-    public static GameObject playerObject = GameObject.Find("PlayerCharacter");
-
-    private int healthCheck;
+    public static int currentLevel = 1;
+    public static GameObject playerObject;
+    public static int coinCount = 0;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +25,18 @@ public class gameManager : MonoBehaviour
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
 
+    }
+    public static void nextLevel()
+    { 
+        coinCount = 0;
+        currentLevel++;
+        string nextLevelName = "Level" + currentLevel;
+        Debug.Log(nextLevelName);
+        SceneManager.LoadScene(nextLevelName);
+    }
+    public static void xd()
+    {
+        Debug.Log("d");
     }
     public static void DeathMainMenu()
     {
@@ -50,8 +64,6 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
     }
 
     }
