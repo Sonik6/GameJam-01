@@ -24,29 +24,29 @@ public class PlayerMovement : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
 
         if (jumpForce == 0.0f && isGrounded)
-        {
+        {          
             rb.velocity = new Vector2(horizontalInput * (moveSpeed * 0.5f), rb.velocity.y);
         }
-       
+
         void Jump()
         {
             jumpForce += 0.1f;
         }
-        
-        
+
+
         if (isGrounded && canJump && Input.GetKey("space"))
 
         {
             Jump();
         }
 
-        if(Input.GetKey("space") && isGrounded && canJump)
+        if (Input.GetKey("space") && isGrounded && canJump)
 
         {
             rb.velocity = new Vector2(0.0f, rb.velocity.y);
         }
-        
-        if(jumpForce >= 15f && isGrounded)
+
+        if (jumpForce >= 15f && isGrounded)
         {
             float tempx = horizontalInput * moveSpeed * 1.5f;
             float tempy = jumpForce;
@@ -63,10 +63,11 @@ public class PlayerMovement : MonoBehaviour
                 jumpForce = 0f;
             }
         }
-        
+
     }
-    
-    void ResetJump() {
+
+    void ResetJump()
+    {
         canJump = false;
         jumpForce = 0f;
     }
