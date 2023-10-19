@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(0.0f, rb.velocity.y);
         }
         
-        if(jumpForce >= 20f && isGrounded)
+        if(jumpForce >= 15f && isGrounded)
         {
             float tempx = horizontalInput * moveSpeed;
             float tempy = jumpForce;
