@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Point : MonoBehaviour
 {
-    public int points = 0;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +14,7 @@ public class Point : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            points = points + 1;
+            gameManager.points = gameManager.points + 1;
             Destroy(gameObject);
         }
     }
