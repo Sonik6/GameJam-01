@@ -14,7 +14,6 @@ public class enemyPrime : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position,
-            player.transform.position, 0.003f);
+        transform.position = Vector2.MoveTowards(transform.position, GameObject.Find("PlayerCharacter").transform.position, 0.001f);
     }
 }
