@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-<<<<<<< Updated upstream
-    public float jumpForce;
-    private Rigidbody2D rb;
     // Start is called before the first frame update
-=======
+
     public float jumpForce = 0f;
     public float moveSpeed = 10;
     public bool canJump = true;
     private Rigidbody2D rb;
     private bool isGrounded;
->>>>>>> Stashed changes
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -23,9 +20,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-<<<<<<< Updated upstream
-        if (Input.GetButtonDown("Jump"))
-=======
+
         float horizontalInput = Input.GetAxis("Horizontal");
 
         void Jump()
@@ -40,15 +35,13 @@ public class PlayerMovement : MonoBehaviour
         }
         
         if (isGrounded && canJump && Input.GetKey("space"))
->>>>>>> Stashed changes
+
         {
             rb.AddForce(new Vector2(rb.velocity.x, jumpForce));
         }
-<<<<<<< Updated upstream
-=======
-        
+
         if(Input.GetKey("space") && isGrounded && canJump)
->>>>>>> Stashed changes
+
         {
             rb.velocity = new Vector2(0.0f, rb.velocity.y);
         }
@@ -76,12 +69,8 @@ public class PlayerMovement : MonoBehaviour
             Move();
         }
     }
-<<<<<<< Updated upstream
-}
-=======
     
-    void ResetJump()
-    {
+    void ResetJump() {
         canJump = false;
         jumpForce = 0f;
     }
@@ -113,4 +102,4 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 }
->>>>>>> Stashed changes
+
