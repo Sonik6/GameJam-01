@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class gameManager : MonoBehaviour
 {
     public GameObject enemyObject;
-    public static UnityEvent playerDamage;
     public static int health = 3;
     public static GameObject playerObject = GameObject.Find("PlayerCharacter");
 
@@ -17,9 +16,7 @@ public class gameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UnityEvent playerDamage = new UnityEvent();
-
-        healthCheck = gameManager.health;
+        playerObject = GameObject.Find("PlayerCharacter");
     }
     public static void Death()
     {
@@ -53,8 +50,6 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        playerDamage.AddListener(Damage);
         
 
     }
