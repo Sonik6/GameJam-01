@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
 
     public float jumpForce = 0f;
-    public float moveSpeed = 10;
+    public float moveSpeed = 5;
     public bool canJump = true;
     private Rigidbody2D rb;
     private bool isGrounded;
@@ -23,21 +23,21 @@ public class PlayerMovement : MonoBehaviour
 
         float horizontalInput = Input.GetAxis("Horizontal");
 
+        if (jumpForce == 0.0f && isGrounded)
+        {
+            rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
+        }
+       
         void Jump()
         {
-            jumpForce += 0.1f;
+            jumpForce += 0.05f;
         }
         
-        void Move()
-        {
-            
-            transform.Translate(new Vector2(horizontalInput, 0) * moveSpeed * Time.deltaTime);
-        }
         
         if (isGrounded && canJump && Input.GetKey("space"))
 
         {
-            rb.AddForce(new Vector2(rb.velocity.x, jumpForce));
+            Jump();
         }
 
         if(Input.GetKey("space") && isGrounded && canJump)
@@ -63,11 +63,7 @@ public class PlayerMovement : MonoBehaviour
                 jumpForce = 0f;
             }
         }
-
-        if (isGrounded)
-        {
-            Move();
-        }
+        
     }
     
     void ResetJump() {
