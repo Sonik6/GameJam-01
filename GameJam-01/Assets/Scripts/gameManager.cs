@@ -9,21 +9,29 @@ public class gameManager : MonoBehaviour
 {
     public GameObject playerObject;
     public GameObject enemyObject;
-    UnityEvent playerDamage;
-    
+    public static UnityEvent playerDamage;
+    public static int health = 3;
+
     private int healthCheck;
 
     // Start is called before the first frame update
     void Start()
     {
-        
-        healthCheck = playerHealth.health;
+        UnityEvent playerDamage = new UnityEvent();
+
+        healthCheck = gameManager.health;
     }
     public static void Death()
     {
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
 
+    }
+    public static void Damage()
+    {
+        gameManager.health = gameManager.health - 1;
+        Death();
+    
     }
     private void OnTriggerEnter2D(Collider2D collision)
     { }
@@ -32,22 +40,22 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("health: " + playerHealth.health);
+        Debug.Log("health: " + gameManager.health);
         Debug.Log("healthcheck:" + healthCheck);
-
-            if (playerHealth.health > 0)
+        playerDamage.AddListener(Damage);
+            if (gameManager.health > 0)
             {
-                healthCheck = playerHealth.health;
+                healthCheck = gameManager.health;
                 playerObject = GameObject.Find("PlayerCharacter");
                 double playerPosY = playerObject.transform.position.y;
                 if (playerPosY < -6)
                 {
-                    playerHealth.health = 0;
+                    gameManager.health = 0;
                 }
             }
-            if (playerHealth.health <= 0)
+            if (gameManager.health <= 0)
             {
-                healthCheck = playerHealth.health;
+                healthCheck = gameManager.health;
                 SceneManager.LoadScene(sceneName: "MainMenu");
             }
         }

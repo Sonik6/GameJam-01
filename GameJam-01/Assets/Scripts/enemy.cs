@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class enemyBehaviour : MonoBehaviour
 {
@@ -35,10 +36,10 @@ public class enemyBehaviour : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-
-            playerHealth.health--;
+            gameManager.playerDamage.Invoke();
+            gameManager.health--;
             gameManager.Death();
-            Debug.Log("player health" + playerHealth.health);
+            Debug.Log("player health" + gameManager.health);
             Destroy(collision.gameObject);
         }
     }
