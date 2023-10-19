@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class gameManager : MonoBehaviour
 {
+    public static int points = 0;
     public GameObject enemyObject;
     public static int health = 3;
     public static int currentLevel = 1;
