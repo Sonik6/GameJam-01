@@ -35,6 +35,8 @@ public class gameManager : MonoBehaviour
     }
     public static void Damage()
     {
+        Debug.Log("player health" + gameManager.health);
+
         gameManager.health = gameManager.health - 1;
         if (gameManager.health <= 0)
         { 
