@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
        
         void Jump()
         {
-            jumpForce += 0.08f;
+            jumpForce += 0.1f;
         }
         
         
@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
         
         if(jumpForce >= 15f && isGrounded)
         {
-            float tempx = horizontalInput * moveSpeed;
+            float tempx = horizontalInput * moveSpeed * 1.5f;
             float tempy = jumpForce;
             rb.velocity = new Vector2(tempx, tempy);
             Invoke("ResetJump", 0.2f);
