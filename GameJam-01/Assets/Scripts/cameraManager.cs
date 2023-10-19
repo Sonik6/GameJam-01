@@ -20,7 +20,7 @@ public class cameraManager : MonoBehaviour
         transform.position = new Vector3
         (
             transform.position.x,
-            Math.Clamp(targetToFollow.position.y, 0f, 10f),
+            Math.Clamp(targetToFollow.position.y, 0f, 100f),
             transform.position.z
         );
     }
