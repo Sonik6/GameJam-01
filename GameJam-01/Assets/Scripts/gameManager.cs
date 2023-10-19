@@ -19,6 +19,7 @@ public class gameManager : MonoBehaviour
     void Start()
     {
         playerObject = GameObject.Find("PlayerCharacter");
+
     }
     public static void Death()
     {

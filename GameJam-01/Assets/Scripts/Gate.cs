@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Gate : MonoBehaviour
 {
-    AudioSource audioData;
+   private AudioSource audioData;
 
     public int coinRequirement = 1;
     // Start is called before the first frame update
