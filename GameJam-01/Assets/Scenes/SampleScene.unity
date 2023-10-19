@@ -226,9 +226,9 @@ GameObject:
   - component: {fileID: 693864887}
   - component: {fileID: 693864886}
   - component: {fileID: 693864885}
-  m_Layer: 0
-  m_Name: Square (1)
-  m_TagString: Untagged
+  m_Layer: 6
+  m_Name: Ground
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -449,7 +449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 070239fffecd0427ca1167de3c444eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 500
+  jumpForce: 10
 --- !u!212 &1622456315
 SpriteRenderer:
   m_ObjectHideFlags: 0
