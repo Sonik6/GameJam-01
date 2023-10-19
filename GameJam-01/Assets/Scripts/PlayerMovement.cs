@@ -4,41 +4,72 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float jumpForce;
+    // Start is called before the first frame update
 
-    public float moveSpeed = 10;
-    public bool inputBlock;
-    
+    public float jumpForce = 0f;
+    public float moveSpeed = 5;
+    public bool canJump = true;
     private Rigidbody2D rb;
     private bool isGrounded;
-
-    void Jump()
-    {
-        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-    }
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
+    // Update is called once per frame
     void Update()
     {
-        
+
         float horizontalInput = Input.GetAxis("Horizontal");
-        transform.Translate(new Vector2(horizontalInput, 0) * moveSpeed * Time.deltaTime);
-        if (isGrounded && Input.GetButtonDown("Jump"))
+
+        if (jumpForce == 0.0f && isGrounded)
+        {
+            rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
+        }
+       
+        void Jump()
+        {
+            jumpForce += 0.05f;
+        }
+        
+        
+        if (isGrounded && canJump && Input.GetKey("space"))
+
         {
             Jump();
         }
 
+        if(Input.GetKey("space") && isGrounded && canJump)
 
-        
         {
-            
+            rb.velocity = new Vector2(0.0f, rb.velocity.y);
         }
-    }
+        
+        if(jumpForce >= 20f && isGrounded)
+        {
+            float tempx = horizontalInput * moveSpeed;
+            float tempy = jumpForce;
+            rb.velocity = new Vector2(tempx, tempy);
+            Invoke("ResetJump", 0.2f);
+        }
 
+        if (Input.GetKeyUp("space"))
+        {
+            canJump = true;
+            if (isGrounded)
+            {
+                rb.velocity = new Vector2(horizontalInput * moveSpeed, jumpForce);
+                jumpForce = 0f;
+            }
+        }
+        
+    }
+    
+    void ResetJump() {
+        canJump = false;
+        jumpForce = 0f;
+    }
     void FixedUpdate()
     {
         // LayerMask for the ground layer (adjust this in the Unity Inspector).
@@ -67,3 +98,4 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 }
+
