@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float jumpForce;
+
+    public float moveSpeed = 10;
     private Rigidbody2D rb;
     private bool isGrounded;
 
@@ -20,9 +22,18 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        
+        float horizontalInput = Input.GetAxis("Horizontal");
+        transform.Translate(new Vector2(horizontalInput, 0) * moveSpeed * Time.deltaTime);
         if (isGrounded && Input.GetButtonDown("Jump"))
         {
             Jump();
+        }
+
+
+        
+        {
+            
         }
     }
 
