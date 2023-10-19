@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class coinCounter : MonoBehaviour
 {
-    public static TMP_Text displayCoins;
-
+    private TMP_Text displayCoins;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +15,6 @@ public class coinCounter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         
+        displayCoins.text = "Coins: " + gameManager.points.ToString();   
     }
 }

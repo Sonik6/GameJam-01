@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2850996452032813065}
   - component: {fileID: 1913084486519030543}
   - component: {fileID: 9027253502915141706}
+  - component: {fileID: 9041778000357614324}
   m_Layer: 5
   m_Name: coinCounter
   m_TagString: Untagged
@@ -66,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'coins: 0'
+  m_text: coin
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a19e858dea856924499f356c6c030f0c, type: 2}
   m_sharedMaterial: {fileID: 3967846930514119413, guid: a19e858dea856924499f356c6c030f0c, type: 2}
@@ -93,8 +94,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 56
-  m_fontSizeBase: 56
+  m_fontSize: 1.2
+  m_fontSizeBase: 1.2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -129,13 +130,25 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: -73.80474, z: -195.96713, w: 0}
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &9027253502915141706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5688828900795809431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53f342af397431047a5d61c8b9e6453a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9041778000357614324
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -166,7 +166,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 888749675}
-  - {fileID: 1584007102}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &693653611
@@ -15204,6 +15203,7 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+<<<<<<< HEAD
 --- !u!1 &1584007101
 GameObject:
   m_ObjectHideFlags: 0
@@ -25562,6 +25562,8 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+=======
+>>>>>>> parent of a31876a (Merge branch 'main' into wyciek2)
 --- !u!1 &1853349214
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ public class gameManager : MonoBehaviour
     public static int health = 3;
     public static int currentLevel = 1;
     public static GameObject playerObject;
+    public static int coinCount = 0;
     
 
     // Start is called before the first frame update
@@ -22,14 +23,24 @@ public class gameManager : MonoBehaviour
     }
     public static void Death()
     {
-        points = 0;
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
-    }
 
+    }
+    public static void nextLevel()
+    { 
+        coinCount = 0;
+        currentLevel++;
+        string nextLevelName = "Level" + currentLevel;
+        Debug.Log(nextLevelName);
+        SceneManager.LoadScene(nextLevelName);
+    }
+    public static void xd()
+    {
+        Debug.Log("d");
+    }
     public static void DeathMainMenu()
     {
-        points = 0;
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene("MainMenu");
         gameManager.health = 3;
