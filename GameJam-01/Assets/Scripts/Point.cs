@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Point : MonoBehaviour
@@ -14,6 +15,11 @@ public class Point : MonoBehaviour
     {     
             if(collision.gameObject.tag=="Player")
             Destroy(gameObject);
+            
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
     }
 
     // Update is called once per frame

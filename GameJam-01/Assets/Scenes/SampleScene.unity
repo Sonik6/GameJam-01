@@ -491,6 +491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32d3b6124b140408299dded3f2295726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movingSpeed: 100
 --- !u!61 &782762750
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -582,7 +583,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &1622456313
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -703,7 +704,7 @@ Transform:
   m_GameObject: {fileID: 1622456311}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.32, y: 0.66, z: 0}
+  m_LocalPosition: {x: -1.79, y: -0.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -722,12 +723,16 @@ PrefabInstance:
       value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 7957008489767434361, guid: fc5d7a520b7a14032ab0123ead139fca, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8703
+      objectReference: {fileID: 0}
+    - target: {fileID: 7957008489767434361, guid: fc5d7a520b7a14032ab0123ead139fca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.4
+      value: 1.82
       objectReference: {fileID: 0}
     - target: {fileID: 7957008489767434361, guid: fc5d7a520b7a14032ab0123ead139fca, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.98
+      value: 0.5448
       objectReference: {fileID: 0}
     - target: {fileID: 7957008489767434361, guid: fc5d7a520b7a14032ab0123ead139fca, type: 3}
       propertyPath: m_LocalPosition.z
