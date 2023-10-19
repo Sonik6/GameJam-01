@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEditor.SearchService;
 
 public class TextMeshProFlash : MonoBehaviour
 {
@@ -26,7 +27,13 @@ public class TextMeshProFlash : MonoBehaviour
     {
         if (Input.GetKeyDown("space"))
         {
-            Destroy(gameObject);
+            if (SceneManager.GetActiveScene().name.ToString() == "Finish")
+            {
+                gameManager.DeathMainMenu();
+            }
+                
+             
+
             SceneManager.LoadScene(sceneName: "Level1");
         }
     }
