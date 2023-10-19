@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,17 +12,24 @@ public class PlayerMovement : MonoBehaviour
     public bool canJump = true;
     private Rigidbody2D rb;
     private bool isGrounded;
+    private SpriteRenderer sr;
+    private float length;
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        Vector3 itemSize = sr.bounds.size;
+        float pixelsPerUnit = sr.sprite.pixelsPerUnit;     
+        itemSize.x *= pixelsPerUnit;
+        length = itemSize.x;
     }
 
     // Update is called once per frame
     void Update()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
-
+        Debug.Log(isGrounded);
         if (jumpForce == 0.0f && isGrounded)
         {
             Vector3 characterScale = transform.localScale;
@@ -52,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
         {
             float tempx = horizontalInput * moveSpeed * 0.6f;
             float tempy = jumpForce;
-            rb.velocity = new Vector2(tempx, tempy);
+            rb.velocity = new Vector2(tempx, tempy);       
             Invoke("ResetJump", 0.2f);
         }
 
@@ -60,9 +68,9 @@ public class PlayerMovement : MonoBehaviour
         {
             canJump = true;
             if (isGrounded)
-            {
+            {       
                 rb.velocity = new Vector2(horizontalInput * moveSpeed, jumpForce);
-                jumpForce = 0f;
+                jumpForce = 0f;                
             }
         }
         
@@ -78,13 +86,14 @@ public class PlayerMovement : MonoBehaviour
         int groundLayerMask = 1 << LayerMask.NameToLayer("Ground");
 
         // Perform ground detection using a 2D raycast.
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1.0f, groundLayerMask);
+        RaycastHit2D hit1 = Physics2D.Raycast(transform.position - new Vector3(0.25f,0,0) , Vector2.down, 1.0f, groundLayerMask);
+        RaycastHit2D hit2 = Physics2D.Raycast(transform.position + new Vector3(0.25f,0,0), Vector2.down, 1.0f, groundLayerMask);
 
-        // If the ray hits something, the player is grounded.
-        isGrounded = (hit.collider != null);
+
+        isGrounded = (hit1.collider != null || hit2.collider != null);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
@@ -92,12 +101,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void OnCollisionExit2D(Collision2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = false;
         }
     }
+
 }
 
