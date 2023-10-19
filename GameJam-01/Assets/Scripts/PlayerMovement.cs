@@ -1,108 +1,87 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
-
-    public float jumpForce = 0f;
-    public float moveSpeed = 5;
-    public bool canJump = true;
+    public float walkSpeed;
+    private float moveInput;
+    public bool isGrounded;
     private Rigidbody2D rb;
-    private bool isGrounded;
-
-
+    public LayerMask groudMask;
+    
+    public PhysicsMaterial2D bounceMaterial, playerMaterial;
+    
+    public bool canJump;
+    public float jumpValue = 0.0f;
+    
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = gameObject.GetComponent<Rigidbody2D>();
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        //Debug.Log(isGrounded);
-        if (jumpForce == 0.0f && isGrounded)
-        {
-            Vector3 characterScale = transform.localScale;
-            if (Input.GetKey("left") && characterScale.x > 0)
-            {
-                characterScale.x *= -1;
-            }
-            if (Input.GetKey("right") && characterScale.x < 0)
-            {
-                characterScale.x *= -1;
-            }
-            transform.localScale = characterScale;
-            rb.velocity = new Vector2(horizontalInput * (moveSpeed * 0.5f), rb.velocity.y);
-        }
+        Debug.Log(canJump);
+        Debug.Log(isGrounded);
+        
+        moveInput = Input.GetAxisRaw("Horizontal");
 
-        if (isGrounded && canJump && Input.GetKey("space"))
+        if (jumpValue == 0.0f && isGrounded)
         {
-            jumpForce += 0.05f;
+            rb.velocity = new Vector2(moveInput * walkSpeed, rb.velocity.y);
+        }
+        
+        isGrounded = Physics2D.OverlapBox(new Vector2(transform.position.x, transform.position.y - 0.5f), new Vector2(0.5f, 0.5f), 0, groudMask);
+
+        if (jumpValue > 0.0f)
+        {
+            rb.sharedMaterial = bounceMaterial;
+        }
+        else
+        {
+            rb.sharedMaterial = playerMaterial;
+        }
+        
+        
+        if(Input.GetKey("space") && isGrounded && canJump)
+        {
+            jumpValue += 0.03f;
         }
 
         if (Input.GetKeyDown("space") && isGrounded && canJump)
         {
             rb.velocity = new Vector2(0.0f, rb.velocity.y);
         }
-
-        if (jumpForce >= 8f && isGrounded)
+        
+        if (jumpValue >= 8f && isGrounded)
         {
-            float tempx = horizontalInput * moveSpeed * 0.6f;
-            float tempy = jumpForce;
-            rb.velocity = new Vector2(tempx, tempy);       
-            Invoke("ResetJump", 0.2f);
-        }
+            float tempx = moveInput * walkSpeed;
+            float tempy = jumpValue;
+            rb.velocity = new Vector2(tempx, tempy);
+            Invoke("ResetJump", 0.3f);
+        }   
 
         if (Input.GetKeyUp("space"))
         {
-            canJump = true;
             if (isGrounded)
-            {       
-                rb.velocity = new Vector2(horizontalInput * moveSpeed, jumpForce);
-                jumpForce = 0f;                
+            {
+                rb.velocity = new Vector2(moveInput * walkSpeed, jumpValue);
+                jumpValue = 0.0f;
             }
+            canJump = true;
         }
-
+        
     }
-
+    
     void ResetJump()
     {
         canJump = false;
-        jumpForce = 0f;
+        jumpValue = 0.0f;
     }
-    void FixedUpdate()
+    void OnDrawGizmosSelected()
     {
-        // LayerMask for the ground layer (adjust this in the Unity Inspector).
-        int groundLayerMask = 1 << LayerMask.NameToLayer("Ground");
-
-
-        RaycastHit2D hit1 = Physics2D.Raycast(transform.position - new Vector3(0.25f, 0, 0), Vector2.down, 1.0f, groundLayerMask);
-        RaycastHit2D hit2 = Physics2D.Raycast(transform.position + new Vector3(0.25f, 0, 0), Vector2.down, 1.0f, groundLayerMask);
-
-
-
-        isGrounded = (hit1.collider != null || hit2.collider != null);
+        Gizmos.color = Color.green;
+        Gizmos.DrawCube(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.5f), new Vector2(0.5f, 0.5f));
     }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = false;
-        }
-    }
-
 }
-
