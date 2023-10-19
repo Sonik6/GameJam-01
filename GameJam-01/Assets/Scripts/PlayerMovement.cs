@@ -27,24 +27,24 @@ public class PlayerMovement : MonoBehaviour
         
         moveInput = Input.GetAxisRaw("Horizontal");
 
-        if (jumpValue == 0.0f && isGrounded)
+        if (jumpValue == 0.0f && isGrounded && rb.sharedMaterial == playerMaterial)
         {
             rb.velocity = new Vector2(moveInput * walkSpeed, rb.velocity.y);
         }
         
-        isGrounded = Physics2D.OverlapBox(new Vector2(transform.position.x, transform.position.y - 0.5f), new Vector2(0.5f, 0.5f), 0, groudMask);
-
-        if (jumpValue > 0.0f)
-        {
-            rb.sharedMaterial = bounceMaterial;
-        }
-        else
+        isGrounded = Physics2D.OverlapBox(new Vector2(transform.position.x, transform.position.y ), new Vector2(0.5f, 0.5f), 0, groudMask);
+     
+        if(isGrounded && canJump)
         {
             rb.sharedMaterial = playerMaterial;
         }
-        
-        
-        if(Input.GetKey("space") && isGrounded && canJump)
+        else
+        {
+            rb.sharedMaterial = bounceMaterial;
+        }
+            
+
+        if (Input.GetKey("space") && isGrounded && canJump)
         {
             jumpValue += 0.03f;
         }
@@ -54,12 +54,14 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(0.0f, rb.velocity.y);
         }
         
-        if (jumpValue >= 8f && isGrounded)
+        if (jumpValue >= 9f && isGrounded && canJump )
         {
             float tempx = moveInput * walkSpeed;
             float tempy = jumpValue;
             rb.velocity = new Vector2(tempx, tempy);
             Invoke("ResetJump", 0.3f);
+            canJump = false;
+            isGrounded = false;
         }   
 
         if (Input.GetKeyUp("space"))
@@ -67,11 +69,19 @@ public class PlayerMovement : MonoBehaviour
             if (isGrounded)
             {
                 rb.velocity = new Vector2(moveInput * walkSpeed, jumpValue);
-                jumpValue = 0.0f;
+                jumpValue = 0.0f;              
             }
-            canJump = true;
+            canJump = false;
+            isGrounded = false;
+
+            Invoke("SetCanJumpFlag", 0.2f);
         }
         
+    }
+
+    void SetCanJumpFlag()
+    {
+        canJump = true;
     }
     
     void ResetJump()
