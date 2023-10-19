@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,21 +12,28 @@ public class PlayerMovement : MonoBehaviour
     public bool canJump = true;
     private Rigidbody2D rb;
     private bool isGrounded;
+    private SpriteRenderer sr;
+    private float length;
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        Vector3 itemSize = sr.bounds.size;
+        float pixelsPerUnit = sr.sprite.pixelsPerUnit;
+        itemSize.x *= pixelsPerUnit;
+        length = itemSize.x;
     }
 
     // Update is called once per frame
     void Update()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
-
+        Debug.Log(isGrounded);
         if (jumpForce == 0.0f && isGrounded)
         {
             Vector3 characterScale = transform.localScale;
-            if (Input.GetKey("left") && characterScale.x>0)
+            if (Input.GetKey("left") && characterScale.x > 0)
             {
                 characterScale.x *= -1;
             }
@@ -37,18 +45,18 @@ public class PlayerMovement : MonoBehaviour
 
             rb.velocity = new Vector2(horizontalInput * (moveSpeed * 0.5f), rb.velocity.y);
         }
-        
+
         if (isGrounded && canJump && Input.GetKey("space"))
         {
             jumpForce += 0.05f;
         }
 
-        if(Input.GetKeyDown("space") && isGrounded && canJump)
+        if (Input.GetKeyDown("space") && isGrounded && canJump)
         {
             rb.velocity = new Vector2(0.0f, rb.velocity.y);
         }
-        
-        if(jumpForce >= 8f && isGrounded)
+
+        if (jumpForce >= 8f && isGrounded)
         {
             float tempx = horizontalInput * moveSpeed * 0.6f;
             float tempy = jumpForce;
@@ -65,10 +73,11 @@ public class PlayerMovement : MonoBehaviour
                 jumpForce = 0f;
             }
         }
-        
+
     }
-    
-    void ResetJump() {
+
+    void ResetJump()
+    {
         canJump = false;
         jumpForce = 0f;
     }
@@ -78,13 +87,14 @@ public class PlayerMovement : MonoBehaviour
         int groundLayerMask = 1 << LayerMask.NameToLayer("Ground");
 
         // Perform ground detection using a 2D raycast.
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1.0f, groundLayerMask);
+        RaycastHit2D hit1 = Physics2D.Raycast(transform.position - new Vector3(0.25f, 0, 0), Vector2.down, 1.0f, groundLayerMask);
+        RaycastHit2D hit2 = Physics2D.Raycast(transform.position + new Vector3(0.25f, 0, 0), Vector2.down, 1.0f, groundLayerMask);
 
-        // If the ray hits something, the player is grounded.
-        isGrounded = (hit.collider != null);
+
+        isGrounded = (hit1.collider != null || hit2.collider != null);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
@@ -92,12 +102,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void OnCollisionExit2D(Collision2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = false;
         }
     }
+
 }
 
