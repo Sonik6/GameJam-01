@@ -27,7 +27,7 @@ public class TextMeshProFlash : MonoBehaviour
         if (Input.GetKeyDown("space"))
         {
             Destroy(gameObject);
-            SceneManager.LoadScene(sceneName: "SampleScene");
+            SceneManager.LoadScene(sceneName: "Level1");
         }
     }
 

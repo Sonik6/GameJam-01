@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
-        Debug.Log(isGrounded);
+        //Debug.Log(isGrounded);
         if (jumpForce == 0.0f && isGrounded)
         {
             Vector3 characterScale = transform.localScale;
