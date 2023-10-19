@@ -24,8 +24,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (jumpForce == 0.0f && isGrounded)
         {
-            Debug.Log(jumpForce);
-            Debug.Log(isGrounded);
+/*            Debug.Log(jumpForce);
+            Debug.Log(isGrounded);*/
             rb.velocity = new Vector2(horizontalInput * (moveSpeed * 0.5f), rb.velocity.y);
         }
         
