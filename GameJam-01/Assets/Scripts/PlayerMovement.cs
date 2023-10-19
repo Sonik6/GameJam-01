@@ -25,12 +25,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (jumpForce == 0.0f && isGrounded)
         {
-            rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(horizontalInput * (moveSpeed * 0.5f), rb.velocity.y);
         }
        
         void Jump()
         {
-            jumpForce += 0.05f;
+            jumpForce += 0.08f;
         }
         
         
@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(0.0f, rb.velocity.y);
         }
         
-        if(jumpForce >= 20f && isGrounded)
+        if(jumpForce >= 15f && isGrounded)
         {
             float tempx = horizontalInput * moveSpeed;
             float tempy = jumpForce;
