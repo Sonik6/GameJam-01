@@ -22,8 +22,8 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
-        Debug.Log(canJump);
-        Debug.Log(isGrounded);
+        //Debug.Log(canJump);
+        //Debug.Log(isGrounded);
         
         moveInput = Input.GetAxisRaw("Horizontal");
 
