@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public ParticleSystem dust;
     public float walkSpeed;
     private float moveInput;
     public bool isGrounded;
@@ -30,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
         if (jumpValue == 0.0f && isGrounded && rb.sharedMaterial == playerMaterial)
         {
             rb.velocity = new Vector2(moveInput * walkSpeed, rb.velocity.y);
+            CreateDust();
         }
         
         isGrounded = Physics2D.OverlapBox(new Vector2(transform.position.x, transform.position.y ), new Vector2(0.5f, 0.5f), 0, groudMask);
@@ -93,5 +95,10 @@ public class PlayerMovement : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawCube(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.5f), new Vector2(0.5f, 0.5f));
+    }
+    
+    void CreateDust()
+    {
+        dust.Play();
     }
 }
