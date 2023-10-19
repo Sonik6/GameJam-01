@@ -908,6 +908,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32d3b6124b140408299dded3f2295726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movingSpeed: 200
 --- !u!61 &782762750
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1043,7 +1044,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.6, y: 0.8}
   m_EdgeRadius: 0
 --- !u!114 &1622456314
 MonoBehaviour:
@@ -1058,7 +1059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 0
-  moveSpeed: 10
+  moveSpeed: 5
   canJump: 1
 --- !u!212 &1622456315
 SpriteRenderer:
