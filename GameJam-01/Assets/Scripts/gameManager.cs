@@ -47,8 +47,7 @@ public class gameManager : MonoBehaviour
             Death();
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    { }
+
 
 
     // Update is called once per frame
