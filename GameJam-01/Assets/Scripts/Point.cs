@@ -14,11 +14,8 @@ public class Point : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log(gameManager.points);
             gameManager.points = gameManager.points + 1;
             Destroy(gameObject);
-            coinCounter.displayCoins.text = "Coins: " + gameManager.points.ToString();
-            Debug.Log(gameManager.points);
         }
     }
 
