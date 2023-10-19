@@ -12,17 +12,11 @@ public class PlayerMovement : MonoBehaviour
     public bool canJump = true;
     private Rigidbody2D rb;
     private bool isGrounded;
-    private SpriteRenderer sr;
-    private float length;
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        Vector3 itemSize = sr.bounds.size;
-        float pixelsPerUnit = sr.sprite.pixelsPerUnit;     
-        itemSize.x *= pixelsPerUnit;
-        length = itemSize.x;
     }
 
     // Update is called once per frame
@@ -33,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
         if (jumpForce == 0.0f && isGrounded)
         {
             Vector3 characterScale = transform.localScale;
-            if (Input.GetKey("left") && characterScale.x>0)
+            if (Input.GetKey("left") && characterScale.x > 0)
             {
                 characterScale.x *= -1;
             }
@@ -42,23 +36,20 @@ public class PlayerMovement : MonoBehaviour
                 characterScale.x *= -1;
             }
             transform.localScale = characterScale;
-
-/*            Debug.Log(jumpForce);
-            Debug.Log(isGrounded);*/
             rb.velocity = new Vector2(horizontalInput * (moveSpeed * 0.5f), rb.velocity.y);
         }
-        
+
         if (isGrounded && canJump && Input.GetKey("space"))
         {
             jumpForce += 0.05f;
         }
 
-        if(Input.GetKeyDown("space") && isGrounded && canJump)
+        if (Input.GetKeyDown("space") && isGrounded && canJump)
         {
             rb.velocity = new Vector2(0.0f, rb.velocity.y);
         }
-        
-        if(jumpForce >= 8f && isGrounded)
+
+        if (jumpForce >= 8f && isGrounded)
         {
             float tempx = horizontalInput * moveSpeed * 0.6f;
             float tempy = jumpForce;
@@ -75,10 +66,11 @@ public class PlayerMovement : MonoBehaviour
                 jumpForce = 0f;                
             }
         }
-        
+
     }
-    
-    void ResetJump() {
+
+    void ResetJump()
+    {
         canJump = false;
         jumpForce = 0f;
     }
@@ -87,9 +79,10 @@ public class PlayerMovement : MonoBehaviour
         // LayerMask for the ground layer (adjust this in the Unity Inspector).
         int groundLayerMask = 1 << LayerMask.NameToLayer("Ground");
 
-        // Perform ground detection using a 2D raycast.
-        RaycastHit2D hit1 = Physics2D.Raycast(transform.position - new Vector3(0.25f,0,0) , Vector2.down, 1.0f, groundLayerMask);
-        RaycastHit2D hit2 = Physics2D.Raycast(transform.position + new Vector3(0.25f,0,0), Vector2.down, 1.0f, groundLayerMask);
+
+        RaycastHit2D hit1 = Physics2D.Raycast(transform.position - new Vector3(0.25f, 0, 0), Vector2.down, 1.0f, groundLayerMask);
+        RaycastHit2D hit2 = Physics2D.Raycast(transform.position + new Vector3(0.25f, 0, 0), Vector2.down, 1.0f, groundLayerMask);
+
 
 
         isGrounded = (hit1.collider != null || hit2.collider != null);
