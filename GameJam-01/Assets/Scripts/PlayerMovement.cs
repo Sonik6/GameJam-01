@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
             }
             transform.localScale = characterScale;
 
+/*            Debug.Log(jumpForce);
+            Debug.Log(isGrounded);*/
             rb.velocity = new Vector2(horizontalInput * (moveSpeed * 0.5f), rb.velocity.y);
         }
         
