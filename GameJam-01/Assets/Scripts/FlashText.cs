@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class TextMeshProFlash : MonoBehaviour
 {
@@ -20,6 +21,14 @@ public class TextMeshProFlash : MonoBehaviour
 
         // Start the flashing coroutine.
         StartCoroutine(FlashText());
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown("space"))
+        {
+            Destroy(gameObject);
+            SceneManager.LoadScene(sceneName: "SampleScene");
+        }
     }
 
     private IEnumerator FlashText()
