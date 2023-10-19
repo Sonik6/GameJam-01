@@ -172,8 +172,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9562c7dacef4d8a4ca0ed1179fb74553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saw: {fileID: 0}
   coinRequirement: 3
+  spawnableObject: {fileID: 0}
 --- !u!82 &7581788989599923305
 AudioSource:
   m_ObjectHideFlags: 0
