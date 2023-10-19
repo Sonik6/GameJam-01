@@ -20,35 +20,37 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         float horizontalInput = Input.GetAxis("Horizontal");
 
         if (jumpForce == 0.0f && isGrounded)
         {
+            Vector3 characterScale = transform.localScale;
+            if (Input.GetKey("left") && characterScale.x>0)
+            {
+                characterScale.x *= -1;
+            }
+            if (Input.GetKey("right") && characterScale.x < 0)
+            {
+                characterScale.x *= -1;
+            }
+            transform.localScale = characterScale;
+
             rb.velocity = new Vector2(horizontalInput * (moveSpeed * 0.5f), rb.velocity.y);
         }
-       
-        void Jump()
-        {
-            jumpForce += 0.1f;
-        }
-        
         
         if (isGrounded && canJump && Input.GetKey("space"))
-
         {
-            Jump();
+            jumpForce += 0.05f;
         }
 
-        if(Input.GetKey("space") && isGrounded && canJump)
-
+        if(Input.GetKeyDown("space") && isGrounded && canJump)
         {
             rb.velocity = new Vector2(0.0f, rb.velocity.y);
         }
         
-        if(jumpForce >= 15f && isGrounded)
+        if(jumpForce >= 8f && isGrounded)
         {
-            float tempx = horizontalInput * moveSpeed * 1.5f;
+            float tempx = horizontalInput * moveSpeed * 0.6f;
             float tempy = jumpForce;
             rb.velocity = new Vector2(tempx, tempy);
             Invoke("ResetJump", 0.2f);

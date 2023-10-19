@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class enemyBehaviour : MonoBehaviour
 {
@@ -13,13 +14,16 @@ public class enemyBehaviour : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(new Vector2(movingSpeed, 0));
+        //rb.AddForce(new Vector2(movingSpeed, 0));
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
+        { 
             Destroy(gameObject);
+
+        }
 
         if (collision.gameObject.tag == "wall")
         {
@@ -31,7 +35,13 @@ public class enemyBehaviour : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
+        {
+            gameManager.playerDamage.Invoke();
+            gameManager.health--;
+            gameManager.Death();
+            Debug.Log("player health" + gameManager.health);
             Destroy(collision.gameObject);
+        }
     }
 
     // Update is called once per frame
