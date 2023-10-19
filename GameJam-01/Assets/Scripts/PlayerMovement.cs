@@ -5,103 +5,121 @@ using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float speed;
+    public float jumpForce = 0.0f;
 
-    public float jumpForce = 0f;
-    public float moveSpeed = 5;
-    public bool canJump = true;
+
     private Rigidbody2D rb;
-    private bool isGrounded;
+    private GatherInput gI;
+    private Animator anim;
+
+    public float rayLength;
+    public bool grounded;
+    public bool preJump = false;
+    public LayerMask groundLayer;
+    public Transform checkPointLeft;
+    public Transform checkPointRight;
+    public PhysicsMaterial2D bounceMat, normalMat;
 
 
+    private int direction = 1;
+
+    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        gI = GetComponent<GatherInput>();
+        anim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        //Debug.Log(isGrounded);
-        if (jumpForce == 0.0f && isGrounded)
+        Flip();
+        SetAnimatorValues();
+        PlayerJump();
+        CheckStatus();
+        PlayerMove();
+    }
+
+    private void PlayerMove()
+    {
+        if (jumpForce == 0.0f && grounded)
         {
-            Vector3 characterScale = transform.localScale;
-            if (Input.GetKey("left") && characterScale.x > 0)
-            {
-                characterScale.x *= -1;
-            }
-            if (Input.GetKey("right") && characterScale.x < 0)
-            {
-                characterScale.x *= -1;
-            }
-            transform.localScale = characterScale;
-            rb.velocity = new Vector2(horizontalInput * (moveSpeed * 0.5f), rb.velocity.y);
+            rb.velocity = new Vector2(speed * gI.valueX, rb.velocity.y);
         }
 
-        if (isGrounded && canJump && Input.GetKey("space"))
+    }
+    private void Flip()
+    {
+        if (gI.valueX * direction < 0)
         {
-            jumpForce += 0.05f;
+            transform.localScale = new Vector3(-transform.localScale.x, 1, 1);
+            direction *= -1;
         }
-
-        if (Input.GetKeyDown("space") && isGrounded && canJump)
+    }
+    private void PlayerJump()
+    {
+        if (gI.jumpInput && grounded)
         {
+            jumpForce += 0.5f;
             rb.velocity = new Vector2(0.0f, rb.velocity.y);
+            rb.sharedMaterial = bounceMat;
+            preJump = true;
         }
-
-        if (jumpForce >= 8f && isGrounded)
+        else
         {
-            float tempx = horizontalInput * moveSpeed * 0.6f;
-            float tempy = jumpForce;
-            rb.velocity = new Vector2(tempx, tempy);       
-            Invoke("ResetJump", 0.2f);
+            preJump = false;
         }
-
-        if (Input.GetKeyUp("space"))
+        if (gI.jumpInput && grounded && jumpForce >= 20.0f || gI.jumpInput == false && jumpForce >= 0.1f)
         {
-            canJump = true;
-            if (isGrounded)
-            {       
-                rb.velocity = new Vector2(horizontalInput * moveSpeed, jumpForce);
-                jumpForce = 0f;                
-            }
+            float tempX = gI.valueX * speed;
+            float tempY = jumpForce;
+            rb.velocity = new Vector2(tempX, tempY);
+            Invoke("ResetJump", 0.025f);
         }
-
-    }
-
-    void ResetJump()
-    {
-        canJump = false;
-        jumpForce = 0f;
-    }
-    void FixedUpdate()
-    {
-        // LayerMask for the ground layer (adjust this in the Unity Inspector).
-        int groundLayerMask = 1 << LayerMask.NameToLayer("Ground");
-
-
-        RaycastHit2D hit1 = Physics2D.Raycast(transform.position - new Vector3(0.25f, 0, 0), Vector2.down, 1.0f, groundLayerMask);
-        RaycastHit2D hit2 = Physics2D.Raycast(transform.position + new Vector3(0.25f, 0, 0), Vector2.down, 1.0f, groundLayerMask);
-
-
-
-        isGrounded = (hit1.collider != null || hit2.collider != null);
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (rb.velocity.y <= -1)
         {
-            isGrounded = true;
+            rb.sharedMaterial = normalMat;
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void ResetJump()
     {
-        if (collision.gameObject.CompareTag("Ground"))
+
+        jumpForce = 0.0f;
+    }
+    private void CheckStatus()
+    {
+        RaycastHit2D leftCheckHit = Physics2D.Raycast(checkPointLeft.position, Vector2.down, rayLength, groundLayer);
+        RaycastHit2D rightCheckHit = Physics2D.Raycast(checkPointRight.position, Vector2.down, rayLength, groundLayer);
+
+        if (leftCheckHit || rightCheckHit)
         {
-            isGrounded = false;
+            grounded = true;
         }
+        else
+        {
+            grounded = false;
+        }
+
+        SeeRays(leftCheckHit, rightCheckHit);
+    }
+
+    private void SeeRays(RaycastHit2D leftCheckHit, RaycastHit2D rightCheckHit)
+    {
+        Color color1 = leftCheckHit ? Color.green : Color.red;
+        Color color2 = rightCheckHit ? Color.green : Color.red;
+
+        Debug.DrawRay(checkPointLeft.position, Vector2.down * rayLength, color1);
+        Debug.DrawRay(checkPointRight.position, Vector2.down * rayLength, color2);
+    }
+
+    private void SetAnimatorValues()
+    {
+        anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
+        anim.SetFloat("vSpeed", rb.velocity.y);
+        anim.SetBool("grounded", grounded);
+        anim.SetBool("preJump", preJump);
     }
 
 }
