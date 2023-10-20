@@ -22,6 +22,7 @@ public class gameManager : MonoBehaviour
     }
     public static void Death()
     {
+
         points = 0;
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
