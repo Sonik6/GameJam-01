@@ -5,6 +5,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using System;
+
 
 public class gameManager : MonoBehaviour
 {
@@ -13,7 +15,7 @@ public class gameManager : MonoBehaviour
     public static int health = 3;
     public static int currentLevel = 1;
     public static GameObject playerObject;
-    
+    public static float timer;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +62,8 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(Time.deltaTime);
+        timer += Time.deltaTime;
     }
 
     }
