@@ -17,9 +17,12 @@ public class gameManager : MonoBehaviour
     public static GameObject playerObject;
     public static float timer;
 
+    public static bool trophyIsWon;
+
     // Start is called before the first frame update
     void Start()
     {
+        trophyIsWon = false;
         playerObject = GameObject.Find("PlayerCharacter");
     }
     public static void Death()
@@ -63,7 +66,9 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
+        if(!trophyIsWon){
+            timer += Time.deltaTime;
+        }
     }
 
     }
