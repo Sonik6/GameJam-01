@@ -8,6 +8,8 @@ public class Gate : MonoBehaviour
     private bool bossResp=false;
     public int coinRequirement = 1;
     public GameObject spawnableObject;
+
+    public GameObject ghostGhost;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,8 +26,9 @@ public class Gate : MonoBehaviour
 
             if (!bossResp)
             {
-                Vector3 spawnPosition = new Vector3(-7.87f, 2.92f, 0f);
+                Vector3 spawnPosition = new Vector3(-7.87f, 2.2f, 0f);
                 Instantiate(spawnableObject, spawnPosition, Quaternion.identity);
+                Destroy(ghostGhost, 0f);
                 bossResp = true;
             }
             Destroy(gameObject);
