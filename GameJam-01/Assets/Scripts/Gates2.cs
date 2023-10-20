@@ -23,6 +23,7 @@ public class Gates2 : MonoBehaviour
             audioData.Play(0);
 
             Destroy(gameObject);
+            enemyPrime.ghostSpeed = enemyPrime.ghostSpeed * 2;
 
         }
 
