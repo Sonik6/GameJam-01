@@ -9,7 +9,7 @@ public class enemyPrime : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ghostSpeed = 0.005f;
+        ghostSpeed = 0.0025f;
     }
 
     // Update is called once per frame
