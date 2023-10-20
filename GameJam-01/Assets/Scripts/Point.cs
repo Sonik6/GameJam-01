@@ -22,7 +22,7 @@ public class Point : MonoBehaviour
             
             gameManager.points = gameManager.points + 1;
             Destroy(gameObject);
-            coinCounter.displayCoins.text = "Coins: " + gameManager.points.ToString();
+            
             
         }
     }

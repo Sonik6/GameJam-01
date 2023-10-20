@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class coinCounter : MonoBehaviour
+public class coinCounter1 : MonoBehaviour
 {
     public static TMP_Text displayCoins;
 
@@ -16,6 +16,6 @@ public class coinCounter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        coinCounter.displayCoins.text = "Coins: " + gameManager.points.ToString();
+        coinCounter1.displayCoins.text = "Coins: " + gameManager.points.ToString();
     }
 }
