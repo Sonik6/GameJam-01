@@ -45,6 +45,11 @@ public class PlayerMovement : MonoBehaviour
             CreateDust();
         }
 
+        if (Mathf.Approximately(rb.velocity.magnitude, 0f))
+        {
+            StopDust();
+        }
+
         isGrounded = Physics2D.OverlapBox(new Vector2(transform.position.x, transform.position.y), new Vector2(0.5f, 0.5f), 0, groudMask);
 
         if (isGrounded && canJump)
@@ -121,4 +126,10 @@ public class PlayerMovement : MonoBehaviour
     {
         dust.Play();
     }
+
+    void StopDust()
+    {
+        dust.Stop();
+    }
+    
 }
