@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class nickEntering : MonoBehaviour
 {
@@ -20,7 +21,8 @@ public class nickEntering : MonoBehaviour
            nick = nickname.text;
             Debug.Log(nick);
             
-        }
+            SceneManager.LoadScene("leaderboard");
+            }
 
         
     }

@@ -19,7 +19,7 @@ public class ScoreUi : MonoBehaviour
         scoreManager.AddScore(new Score("Marcin", 500));
         scoreManager.AddScore(new Score("Wiktor", 600));
         scoreManager.AddScore(new Score("Slawek", 800));
-
+        scoreManager.AddScore(new Score(nickEntering.nick, gameManager.timer));
 
 
         var times = scoreManager.GetHighScores().ToArray();
