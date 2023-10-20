@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey("space") && isGrounded && canJump)
         {
             if (jumpValue < 9f)
-                jumpValue += 0.03f;
+                jumpValue += 0.24f;
         }
 
 

@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using TMPro;
 using UnityEngine.SceneManagement;
-using UnityEditor.SearchService;
+using UnityEditor;
 
 public class TextMeshProFlash : MonoBehaviour
 {
