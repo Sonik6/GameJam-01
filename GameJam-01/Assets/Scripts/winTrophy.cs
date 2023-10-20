@@ -17,6 +17,7 @@ public class winTrophy : MonoBehaviour
         if (collision.gameObject == GameObject.Find("PlayerCharacter") && gameManager.points >= 10)
         {
             gameManager.Win(); 
+            gameManager.trophyIsWon = true;
         }
     }
     // Update is called once per frame
