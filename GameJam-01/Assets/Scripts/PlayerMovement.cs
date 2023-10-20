@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groudMask;
     public SpriteRenderer sr;
     private Animator animator;
-
+    private AudioSource audioData;
     public PhysicsMaterial2D bounceMaterial, playerMaterial;
 
     public bool canJump;
@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        audioData = GameObject.Find("Main Camera").GetComponent<AudioSource>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         sr = gameObject.GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
@@ -92,6 +93,8 @@ public class PlayerMovement : MonoBehaviour
 
             if (isGrounded)
             {
+                audioData.clip = Resources.Load<AudioClip>("muzyka/jump");
+                audioData.Play(0);
                 rb.velocity = new Vector2(moveInput * walkSpeed, jumpValue);
                 jumpValue = 0.0f;               
             }
