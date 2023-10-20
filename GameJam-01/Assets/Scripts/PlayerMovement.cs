@@ -27,15 +27,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-<<<<<<< HEAD
-        Debug.Log(canJump);
-        Debug.Log(isGrounded);
-
-=======
-        //Debug.Log(canJump);
-        //Debug.Log(isGrounded);
-        
->>>>>>> main
         moveInput = Input.GetAxisRaw("Horizontal");
 
         if (jumpValue == 0.0f && isGrounded && rb.sharedMaterial == playerMaterial)
