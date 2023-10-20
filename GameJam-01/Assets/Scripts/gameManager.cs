@@ -26,11 +26,16 @@ public class gameManager : MonoBehaviour
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
     }
+    public static void Win()
+    {
+        points = 0;
+        gameManager.health = 3;
+        SceneManager.LoadScene("Finish");
+    }
 
     public static void DeathMainMenu()
     {
         points = 0;
-        Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene("MainMenu");
         gameManager.health = 3;
     }
