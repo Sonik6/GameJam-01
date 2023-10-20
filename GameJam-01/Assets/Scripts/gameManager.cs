@@ -24,7 +24,7 @@ public class gameManager : MonoBehaviour
     }
     public static void Death()
     {
-
+        timer = 0;
         points = 0;
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
@@ -38,6 +38,7 @@ public class gameManager : MonoBehaviour
 
     public static void DeathMainMenu()
     {
+        timer = 0;
         points = 0;
         SceneManager.LoadScene("MainMenu");
         gameManager.health = 3;
@@ -62,7 +63,6 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(Time.deltaTime);
         timer += Time.deltaTime;
     }
 
