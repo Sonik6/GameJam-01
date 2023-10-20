@@ -27,7 +27,7 @@ public class TextMeshProFlash1 : MonoBehaviour
     {
         if (Input.GetKeyDown("space"))
         {
-            SceneManager.LoadScene(sceneName: "MainMenu");
+            SceneManager.LoadScene(sceneName: "EnterNickname");
         }
     }
 
