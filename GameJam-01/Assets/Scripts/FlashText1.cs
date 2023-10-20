@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEditor.SearchService;
 
-public class TextMeshProFlash : MonoBehaviour
+public class TextMeshProFlash1 : MonoBehaviour
 {
     public TextMeshProUGUI textMeshPro;
     public float flashInterval = 0.5f;  // Time in seconds between each flash
@@ -27,7 +27,7 @@ public class TextMeshProFlash : MonoBehaviour
     {
         if (Input.GetKeyDown("space"))
         {
-            SceneManager.LoadScene(sceneName: "Level1");
+            SceneManager.LoadScene(sceneName: "MainMenu");
         }
     }
 
