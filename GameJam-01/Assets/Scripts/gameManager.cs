@@ -34,6 +34,7 @@ public class gameManager : MonoBehaviour
     }
     public static void Win()
     {
+        timer = 0;
         points = 0;
         gameManager.health = 3;
         SceneManager.LoadScene("Finish");
